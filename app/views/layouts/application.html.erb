@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TemplateRubyOnRails</title>
+    <title>WeatherForecast<%= @location.present? ? " for #{@location}" : ""%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -21,6 +21,12 @@
       </div>
     </div>
   </header>
+
+  <% flash.each do |key, value| %>
+    <div class="alert alert-secondary" role="alert">
+        <strong><%=key.upcase%>:</strong> <%= value %>
+    </div>
+  <% end %>
 
   <div class="container">
     <%= yield %>

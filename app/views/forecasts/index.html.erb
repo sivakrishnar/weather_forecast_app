@@ -1,2 +1,7 @@
 <%= render "form" %>
+<p>Latitude, Longitude: <%= @latitude%>,<%=@longitude%></p>
+<h3>Weather forecast for <%= @location %></h3>
 
+<% @weather_forecast['periods'].each do |forecast| %>
+   <%= forecast['temperature']%><%=forecast['temperatureUnit'] %>
+<% end %>
