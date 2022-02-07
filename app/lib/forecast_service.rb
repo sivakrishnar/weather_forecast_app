@@ -19,11 +19,12 @@ class ForecastService
              if points
                @forecast_url = points["forecast"]
                @current_weather_url = points["forecastHourly"]
+               return true
              end
          end
        rescue HTTParty::Error, SocketError => e
-         puts "Weather service is down, Please try again after sometime"
        end
+       false
     end
 
     def get_weather_forecast
@@ -33,8 +34,7 @@ class ForecastService
         if properties and properties.has_key? "periods"
           return properties["periods"][1..12]
         end
-      rescue HTTParty::Error, SocketError => e
-        puts "Weather service is down, Please try later"
+      rescue => e
       end
       []
     end
@@ -44,8 +44,7 @@ class ForecastService
         response = self.class.get(@current_weather_url)
         properties = Oj.load(response.body)["properties"]
         return properties["periods"][0]
-      rescue HTTParty::Error, SocketError => e
-        puts "Weather service is down, Please try later"
+      rescue => e
       end
       []
     end

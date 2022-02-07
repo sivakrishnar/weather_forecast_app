@@ -5,8 +5,7 @@ class ForecastsController < ApplicationController
   def index
     @address = params[:address]
     geocoder_service = GeocoderService.new(@address)
-    geocoder_service.populate_geocoder_info
-    if geocoder_service.success?
+    if geocoder_service.populate_geocoder_info
       @location = geocoder_service.location
       @forecast_service = ForecastService.new(geocoder_service.latitude, 
                                               geocoder_service.longitude)
