@@ -22,13 +22,12 @@
     </div>
   </header>
 
-  <% flash.each do |key, value| %>
-    <div class="alert alert-secondary" role="alert">
-        <strong><%=key.upcase%>:</strong> <%= value %>
-    </div>
-  <% end %>
-
   <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-danger" role="alert">
+        <strong><%=key.upcase%>:</strong> <%= value %>
+      </div>
+    <% end %>
     <%= yield %>
   </div>
 
